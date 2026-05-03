@@ -1,0 +1,141 @@
+
+:host {
+    width: 100%;
+}
+footer {
+  background-color: var(--color-footer-bg);
+  color: var(--color-footer-text);
+  padding: 40px 20px 20px;
+  margin-top: auto;
+  width: 100%;
+  align-self: stretch;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-section h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: var(--color-bg-light);
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 12px;
+}
+
+.footer-section ul li a {
+  color: var(--color-footer-text);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: var(--color-bg-light);
+}
+
+.footer-section p {
+  color: var(--color-footer-text);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.contact-info {
+  margin-top: 15px;
+}
+
+.contact-info p {
+  margin-bottom: 8px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-links a {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-bg-light);
+  text-decoration: none;
+  transition: background-color 0.3s;
+  flex-shrink: 0;
+}
+
+.social-links a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  text-align: center;
+  color: var(--color-footer-text);
+  font-size: 14px;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.payment-methods span {
+  background-color: var(--color-bg-dark);
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: var(--color-text-xlight);
+}
+
+.payment-methods {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.payment-methods span {
+  background-color: var(--color-bg-dark);
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 12px;
+  color: var(--color-text-xlight);
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-section {
+    min-width: 100%;
+  }
+}

@@ -307,7 +307,6 @@ select:focus {
   color: #fff;
 }
 
-/* Footer — Sign In */
 .mobile-nav-footer {
   margin-top: auto;
   padding-top: 2rem;
@@ -358,8 +357,16 @@ header .openMobMenu {
     transform 0.25s ease,
     opacity 0.25s ease;
 }
+.open {
+  position: fixed;
+  top: 5%;
+  right: 10%;
+  
+}
+.open span {
+  background-color: white;
+}
 
-/* Animate to X when open */
 .BurgerMenu.open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }

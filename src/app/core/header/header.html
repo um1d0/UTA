@@ -1,6 +1,6 @@
 <header class="header">
   <a class="logo" routerLink="/home">
-    <div class="logo-icon"></div>
+    <div class="logo-icon"><img src="{{logo}}" alt="UTA" width="60px" height="40px"></div>
     <span class="logo-name">UTA Electronics</span>
   </a>
   <nav class="PCnav">
@@ -22,72 +22,74 @@
     <a routerLink="/about" routerLinkActive="active">About</a>
     <a routerLink="/contact" routerLinkActive="active">Contact</a>
   </nav>
-  <nav class="MobileNav" [class.openMobMenu]="Isopen()">
-   <div class="mobile-nav-header">
-    <a class="logo" routerLink="/home" (click)="open()">
-      <div class="logo-icon logo-icon--light"></div>
-      <span class="logo-name logo-name--light">UTA Electronics</span>
-    </a>
-  </div>
 
-  <div class="mobile-search-wrap">
+  <nav class="MobileNav" [class.openMobMenu]="Isopen()">
+    <div class="mobile-nav-header">
+      <a class="logo" routerLink="/home" (click)="open()">
+        <div class="logo-icon logo-icon--light"></div>
+        <span class="logo-name logo-name--light">UTA Electronics</span>
+      </a>
+    </div>
+
+    <div class="mobile-search-wrap">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
+      <input type="text" placeholder="Search products..." />
+    </div>
+
+    <div class="mobile-nav-links">
+      <a routerLink="/home" routerLinkActive="active" (click)="open()">Home</a>
+      <a routerLink="/shop" routerLinkActive="active" (click)="open()">Shop</a>
+      <a routerLink="/about" routerLinkActive="active" (click)="open()">About</a>
+      <a routerLink="/contact" routerLinkActive="active" (click)="open()">Contact</a>
+    </div>
+
+    <div class="mobile-categories">
+      <p class="mobile-categories-label">Categories</p>
+      <select class="mobile-categories-select" name="mobile-categories">
+        <option value="">All Categories</option>
+        <option value="laptops">Laptops</option>
+        <option value="smartphones">Smartphones</option>
+        <option value="monitors">Monitors</option>
+        <option value="keyboards-mice">Keyboards & Mice</option>
+        <option value="headphones-audio">Headphones & Audio</option>
+        <option value="graphics-cards">Graphics Cards</option>
+        <option value="storage">Storage</option>
+        <option value="networking">Networking</option>
+      </select>
+    </div>
+
+    <div class="mobile-nav-footer">
+      <button class="cart-btn cart-btn--mobile">
+        Cart
+        <span class="cart-badge">{{ cartCount }}</span>
+      </button>
+      <button class="mobile-signin-btn"  routerLink="/auth">Sign In</button>
+    </div>
+  </nav>
+
+  <button class="BurgerMenu" [class.open]="Isopen()" (click)="open()">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="search-wrap">
     <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24"
       fill="none" stroke="currentColor" stroke-width="2"
       stroke-linecap="round" stroke-linejoin="round">
       <circle cx="11" cy="11" r="8" />
       <line x1="21" y1="21" x2="16.65" y2="16.65" />
     </svg>
-    <input type="text" placeholder="Search products..." />
-  </div>
-
-  <div class="mobile-nav-links">
-    <a routerLink="/home" routerLinkActive="active" (click)="open()">Home</a>
-    <a routerLink="/shop" routerLinkActive="active" (click)="open()">Shop</a>
-    <a routerLink="/about" routerLinkActive="active" (click)="open()">About</a>
-    <a routerLink="/contact" routerLinkActive="active" (click)="open()">Contact</a>
-  </div>
-
-  <div class="mobile-categories">
-  <p class="mobile-categories-label">Categories</p>
-  <select class="mobile-categories-select" name="mobile-categories">
-    <option value="">All Categories</option>
-    <option value="laptops">Laptops</option>
-    <option value="smartphones">Smartphones</option>
-    <option value="monitors">Monitors</option>
-    <option value="keyboards-mice">Keyboards & Mice</option>
-    <option value="headphones-audio">Headphones & Audio</option>
-    <option value="graphics-cards">Graphics Cards</option>
-    <option value="storage">Storage</option>
-    <option value="networking">Networking</option>
-  </select>
-</div>
-
-  <div class="mobile-nav-footer">
-    <button class="mobile-signin-btn">Sign In</button>
-  </div>
-    
-
-    
-  </nav>
-  <button class="BurgerMenu" [class.open]="Isopen()" (click)="open()"><span></span><span></span><span></span></button>
-
-  <div class="search-wrap">
-    <svg
-      class="search-icon"
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <line x1="21" y1="21" x2="16.65" y2="16.65" />
-    </svg>
     <input type="text" placeholder="Search products..." class="searchbar"/>
   </div>
 
-  <button class="signin-btn">Sign In</button>
+  <button class="cart-btn">
+    Cart
+    <span class="cart-badge">{{ cartCount }}</span>
+  </button>
+
+  <button class="signin-btn" routerLink="/login">Sign In</button>
 </header>

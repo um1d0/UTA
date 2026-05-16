@@ -1,0 +1,124 @@
+:host{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 100%;
+    height: 100vh;
+    padding-bottom: 17rem;
+}
+
+
+.welcometext {
+    font-family: 'Poppins', sans-serif; /* თუ არ გაქვს Poppins, გამოიყენებს ჩვეულებრივ Sans-serif-ს */
+    color: #2D0057; /* შენი იასამნისფერი */
+    font-size: 2.3rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+}
+/* მთლიანი გვერდის ცენტრირება */
+/* კონტეინერი, რომელიც ფორმას შუაში მოაქცევს Header-სა და Footer-ს შორის */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+/* ლოგინის ფორმის სტილი */
+.LogInForm {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* რბილი ჩრდილი */
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ინპუტების დიზაინი */
+.LogInForm input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #D0D0D0; /* შენი ფერი */
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.LogInForm input:focus {
+    border-color: #2D0057; /* ფოკუსისას შენი იასამნისფერი */
+}
+
+/* შეცდომის შეტყობინება */
+.LogInForm span {
+    color: #d9534f;
+    font-size: 12px;
+    margin-top: -10px;
+}
+
+/* ღილაკების საერთო სტილი */
+.LogInForm button {
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+/* Log In ღილაკი (მთავარი) */
+.logInbtn {
+    background-color: #2D0057; /* შენი მუქი იასამნისფერი */
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+.logInbtn:hover:not(:disabled) {
+    background-color: #450085;
+    transform: translateY(-2px);
+}
+
+.logInbtn:disabled {
+    background-color: #D0D0D0;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* Register ღილაკი (ზუსტად Log In-ის ნაირი) */
+.registrationbtn {
+  /* სტილის კოპირება Log In-დან */
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px; /* ზუსტად ისე, როგორც .logInForm button-ს */
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  margin-top: 10px;
+
+  /* განსხვავებული ფერი (მაგალითად, მუქი ნაცრისფერი/ნახშირისფერი) */
+  background-color: #2D0057; 
+  color: #ffffff;
+}
+
+/* Hover ეფექტი */
+.registrationbtn:hover {
+  background-color: #1e293b; /* ოდნავ მუქი ჰოვერზე */
+  transform: translateY(-2px); /* როგორც Log In-ს აქვს */
+}
+
+/* Active ეფექტი */
+.registrationbtn:active {
+  transform: translateY(0);
+}

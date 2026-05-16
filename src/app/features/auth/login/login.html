@@ -1,0 +1,28 @@
+
+<form (ngSubmit)="onSubmit()" #logInForm="ngForm" class="LogInForm">
+  <h1 class="welcometext">Welcome, glad to see you back.</h1>
+  <input type="email" placeholder="Email" [(ngModel)]="LoginData.email" #emailInput="ngModel" />
+
+  @if (emailInput.invalid && emailInput.touched) {
+    <span>Enter Email</span>
+  }
+  <input
+    type="password"
+    placeholder="Password"
+    required
+    [(ngModel)]="LoginData.password"
+    #passwordInput="ngModel"
+    required
+    minlength="8"
+  />
+  @if (passwordInput.hasError('required') && passwordInput.touched) {
+    <span>Enter Password</span>
+  }
+  
+    <a class="registrationbtn" routerLink="/register" routerLinkActive="active">register</a>
+
+
+  <button type="submit" class="logInbtn" [disabled]="logInForm.invalid">Log in</button>
+  <div class="login-wrapper">
+   </div>
+</form>

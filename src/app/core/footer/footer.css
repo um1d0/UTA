@@ -1,6 +1,7 @@
 
 :host {
     width: 100%;
+    padding-top: 10rem;
 }
 footer {
   background-color: var(--color-footer-bg);

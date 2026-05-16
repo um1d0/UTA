@@ -1,7 +1,7 @@
 
 <form (ngSubmit)="onSubmit()" #logInForm="ngForm" class="LogInForm">
   <h1 class="welcometext">Welcome, glad to see you back.</h1>
-  <input type="email" placeholder="Email" [(ngModel)]="LoginData.email" #emailInput="ngModel" />
+  <input type="email" placeholder="Email" [(ngModel)]="LoginData.email" #emailInput="ngModel" name="email" required/>
 
   @if (emailInput.invalid && emailInput.touched) {
     <span>Enter Email</span>
@@ -12,6 +12,7 @@
     required
     [(ngModel)]="LoginData.password"
     #passwordInput="ngModel"
+    name="password"
     required
     minlength="8"
   />

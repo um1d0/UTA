@@ -8,6 +8,7 @@ import { Auth } from './features/auth/auth';
 import { Login } from './features/auth/login/login';
 import { Register } from './features/auth/register/register';
 import { Userprofile } from './features/auth/userprofile/userprofile';
+import { AllProducts } from './features/all-products/all-products';
 
 export const routes: Routes = [
     {path:'',component:Home,pathMatch:'full'},
@@ -21,4 +22,5 @@ export const routes: Routes = [
     {path:'login',component:Login},
     {path:'register',component:Register},
     {path:'userprofile',component:Userprofile},
+    {path:'allproducts',component:AllProducts}
 ];

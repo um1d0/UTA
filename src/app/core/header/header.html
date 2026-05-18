@@ -64,8 +64,8 @@
     </div>
 
     <div class="mobile-nav-footer">
-      <a routerLink="/cart"> <button class="cart-btn cart-btn--mobile">
-        Cart
+      <a routerLink="/cart"> <button class="cart-btn cart-btn--mobile">Cart
+        
         <span class="cart-badge">{{ cartCount }}</span>
       </button></a>
       <button class="mobile-signin-btn"  routerLink="/auth">Sign In</button>
@@ -85,7 +85,7 @@
     </svg>
     <input type="text" placeholder="Search products..." class="searchbar"/>
   </div>
-<a routerLink="/cart">
+<a routerLink="/cart" class="CartBtn-a">
   <button class="cart-btn">
     Cart
     <span class="cart-badge">{{ cartCount }}</span>

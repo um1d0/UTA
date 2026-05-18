@@ -1,1 +1,27 @@
-<p>register works!</p>
+<form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="LogInForm">
+  <h1 class="welcometext">Create your account.</h1>
+
+  <input type="text" placeholder="First Name" [(ngModel)]="registerData.firstName" name="firstName" #firstNameInput="ngModel" required />
+  @if (firstNameInput.invalid && firstNameInput.touched) {
+    <span>Enter First Name</span>
+  }
+
+  <input type="text" placeholder="Last Name" [(ngModel)]="registerData.lastName" name="lastName" #lastNameInput="ngModel" required />
+  @if (lastNameInput.invalid && lastNameInput.touched) {
+    <span>Enter Last Name</span>
+  }
+
+  <input type="email" placeholder="Email" [(ngModel)]="registerData.email" name="email" #emailInput="ngModel" required />
+  @if (emailInput.invalid && emailInput.touched) {
+    <span>Enter Email</span>
+  }
+
+  <input type="password" placeholder="Password" [(ngModel)]="registerData.password" name="password" #passwordInput="ngModel" required minlength="8" />
+  @if (passwordInput.hasError('required') && passwordInput.touched) {
+    <span>Enter Password</span>
+  }
+
+  <button type="submit" class="logInbtn" [disabled]="registerForm.invalid">Register</button>
+
+  <a class="registrationbtn" routerLink="/login" routerLinkActive="active">Log in</a>
+</form>

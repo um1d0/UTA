@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { RouterLink,RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-login',
-  imports: [FormsModule,],
+  imports: [FormsModule,RouterLink,RouterLinkActive],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -18,7 +18,8 @@ export class Login {
     password: '',
   };
   onSubmit() {
-    this.http.post('https://shopapi.stepacademy.ge/api/auth/login',this.LoginData).subscribe({
+    this.http.post('https://shopapi.stepacademy.ge/api/auth/login',this.LoginData
+    ).subscribe({
       next: (data:any) => {
         localStorage.setItem('access_token', data.access_token);
         localStorage.setItem('refresh_token', data.refresh_token);

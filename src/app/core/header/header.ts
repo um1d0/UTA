@@ -27,5 +27,5 @@ export class Header {
     this.router.navigateByUrl('/login');
   }
 
-  logo = '/public/logo.png';
+  logo = 'https://cdn.discordapp.com/attachments/1476594927629504720/1506001464106029197/6EhsP0AAAAGSURBVAMAZivVqLh1cDAAAAAASUVORK5CYII.png?ex=6a0caca9&is=6a0b5b29&hm=54b5564f2825d24ff877149247c93f95fc36051762202cebec9a250638310662&';
 }

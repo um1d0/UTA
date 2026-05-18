@@ -1,6 +1,6 @@
 <header class="header">
   <a class="logo" routerLink="/home">
-    <div class="logo-icon"><img src="{{logo}}" alt="UTA" width="60px" height="40px"></div>
+    <div class="logo-icon"><img src="/public/logo.png" alt="UTA" width="60px" height="40px"></div>
     <span class="logo-name">UTA Electronics</span>
   </a>
   <nav class="PCnav">
@@ -64,10 +64,10 @@
     </div>
 
     <div class="mobile-nav-footer">
-      <button class="cart-btn cart-btn--mobile">
+      <a routerLink="/cart"> <button class="cart-btn cart-btn--mobile">
         Cart
         <span class="cart-badge">{{ cartCount }}</span>
-      </button>
+      </button></a>
       <button class="mobile-signin-btn"  routerLink="/auth">Sign In</button>
     </div>
   </nav>
@@ -85,11 +85,11 @@
     </svg>
     <input type="text" placeholder="Search products..." class="searchbar"/>
   </div>
-
+<a routerLink="/cart">
   <button class="cart-btn">
     Cart
     <span class="cart-badge">{{ cartCount }}</span>
-  </button>
+  </button></a>
 
   <button class="signin-btn" routerLink="/login">Sign In</button>
 </header>

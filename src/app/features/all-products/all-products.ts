@@ -14,9 +14,8 @@ import { apiInterceptor } from '../../api-interceptor';
 })
 export class AllProducts implements OnInit {
   private http = inject(HttpClient);
-
+  
   productsList = signal<any>(null);
-  Reviews = signal<any>(null);
   ngOnInit() {
     this.getProducts();
   }
@@ -25,19 +24,7 @@ export class AllProducts implements OnInit {
       .get('https://shopapi.stepacademy.ge/api/products')
       .subscribe({ next: (data: any) => this.productsList.set(data) });
   }
-  getReviews() {
-    this.http
-      .get(`https://shopapi.stepacademy.ge/api/reviews/${isNgTemplate.id}`)
-      .subscribe({ next: (data: any) => this.Reviews.set(data) });
-  }
+
 }
 
-// products: product[] = [];
 
-// constructor(private productsService: ProductsService) {}
-
-// ngOnInit() {
-//   this.productsService.getProducts().subscribe((response) => {
-//     this.products = response.items;
-//   });
-// }

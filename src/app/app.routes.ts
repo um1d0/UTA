@@ -9,16 +9,16 @@ import { Login } from './features/auth/login/login';
 import { Register } from './features/auth/register/register';
 import { Userprofile } from './features/auth/userprofile/userprofile';
 import { AllProducts } from './features/all-products/all-products';
+import { authGuard } from './shared/guards/auth-guard';
 
 export const routes: Routes = [
     {path:'',component:Home,pathMatch:'full'},
     {path:'home',component:Home},
-    {path:'about',component:About,
-    },
+    {path:'about',component:About},
     {path:'contact',component:Contact},
     {path:'shop',component:Shop},
-    {path:'cart',component:Cart, canActivate:[]},
-    {path:'auth',component:Auth,},
+    {path:'cart',component:Cart, canActivate:[authGuard]},
+    {path:'auth',component:Auth},
     {path:'login',component:Login},
     {path:'register',component:Register},
     {path:'userprofile',component:Userprofile},

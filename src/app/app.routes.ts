@@ -10,6 +10,8 @@ import { Register } from './features/auth/register/register';
 import { Userprofile } from './features/auth/userprofile/userprofile';
 import { AllProducts } from './features/all-products/all-products';
 import { authGuard } from './shared/guards/auth-guard';
+import { VerifyEmail } from './features/auth/register/verify-email/verify-email';
+
 
 export const routes: Routes = [
     {path:'',component:Home,pathMatch:'full'},
@@ -22,5 +24,6 @@ export const routes: Routes = [
     {path:'login',component:Login},
     {path:'register',component:Register},
     {path:'userprofile',component:Userprofile},
-    {path:'allproducts',component:AllProducts}
+    {path:'allproducts',component:AllProducts},
+    {path:'verify-email',component:VerifyEmail},
 ];

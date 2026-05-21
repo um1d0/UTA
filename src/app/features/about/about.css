@@ -1,0 +1,160 @@
+* {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #D0D0D0;
+            color: #2D0057;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ნავიგაცია / ჰედერი */
+        header {
+            background-color: #2D0057;
+            color: #D0D0D0;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #D0D0D0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* მთავარი კონტენტი */
+        .main-content {
+            flex: 1;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        /* დეკორატიული ხაზი სათაურის ქვეშ */
+        .about-text h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #2D0057;
+            border-radius: 2px;
+        }
+
+        .about-text p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* ვიზუალური ბლოკი (ფოტოს ჩასასმელი ადგილი) */
+        .about-image-placeholder {
+            flex: 1;
+            background-color: #2D0057;
+            color: #D0D0D0;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(45, 0, 87, 0.2);
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* ფუტერი */
+        footer {
+            background-color: #2D0057;
+            color: #D0D0D0;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        /* რესპონსივი მობილური მოწყობილობებისთვის (ტაბლეტები და სმარტფონები) */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .main-content {
+                flex-direction: column-reverse; /* მობილურზე ტექსტი ავა ზემოთ, ვიზუალი ჩამოვა ქვემოთ */
+                gap: 30px;
+                margin: 20px auto;
+            }
+
+            .about-text h1 {
+                font-size: 32px;
+                text-align: center;
+            }
+
+            .about-text h1::after {
+                left: 50%;
+                transform: translateX(-50%); /* ხაზის გაცენტრება მობილურზე */
+            }
+
+            .about-text p {
+                font-size: 16px;
+                text-align: center;
+            }
+
+            .about-image-placeholder {
+                width: 100%;
+                height: 250px;
+                font-size: 16px;
+            }
+        }

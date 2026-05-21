@@ -1,1 +1,36 @@
-<p>cart works!</p>
+<div class="cart-container">
+  <h2>Your Cart</h2>
+
+  @if (cartItems.length === 0) {
+    <div class="empty-cart">
+      <p>Your cart is empty.</p>
+      <button routerLink="/shop" class="btn-primary">Continue Shopping</button>
+    </div>
+  } @else {
+    <div class="cart-items">
+      @for (item of cartItems; track item.productId) {
+        <div class="cart-item">
+          <img [src]="item.imageUrl" [alt]="item.name" />
+          <div class="item-info">
+            <h3>{{ item.name }}</h3>
+            <p class="item-price">{{ item.price | currency }}</p>
+          </div>
+          <div class="item-actions">
+            <button class="qty-btn" (click)="decrease(item)">-</button>
+            <span class="quantity">{{ item.quantity }}</span>
+            <button class="qty-btn" (click)="increase(item)">+</button>
+          </div>
+          <button class="remove-btn" (click)="remove(item.productId)">Remove</button>
+        </div>
+      }
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <strong>{{ total | currency }}</strong>
+      </div>
+      <button class="btn-primary" routerLink="/checkout">Proceed to Checkout</button>
+    </div>
+  }
+</div>

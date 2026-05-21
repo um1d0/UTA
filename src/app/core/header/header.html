@@ -64,11 +64,25 @@
     </div>
 
     <div class="mobile-nav-footer">
-      <a routerLink="/cart"> <button class="cart-btn cart-btn--mobile">Cart
-        
-        <span class="cart-badge">{{ cartCount }}</span>
-      </button></a>
-      <button class="mobile-signin-btn"  routerLink="/auth">Sign In</button>
+      <a routerLink="/cart">
+        <button class="cart-btn cart-btn--mobile">Cart
+          <span class="cart-badge">{{ cartCount }}</span>
+        </button>
+      </a>
+
+      @if (isLoggedIn()) {
+        <button class="mobile-signin-btn user-icon-btn" routerLink="/userprofile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="10" r="3"/>
+            <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
+          </svg>
+        </button>
+      } @else {
+        <button class="mobile-signin-btn" routerLink="/auth">Sign In</button>
+      }
     </div>
   </nav>
 
@@ -85,11 +99,25 @@
     </svg>
     <input type="text" placeholder="Search products..." class="searchbar"/>
   </div>
-<a routerLink="/cart" class="CartBtn-a">
-  <button class="cart-btn">
-    Cart
-    <span class="cart-badge">{{ cartCount }}</span>
-  </button></a>
 
-  <button class="signin-btn" routerLink="/login">Sign In</button>
+  <a routerLink="/cart" class="CartBtn-a">
+    <button class="cart-btn">
+      Cart
+      <span class="cart-badge">{{ cartCount }}</span>
+    </button>
+  </a>
+
+  @if (isLoggedIn()) {
+    <button class="user-icon-btn" routerLink="/userprofile" title="My Profile">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <circle cx="12" cy="10" r="3"/>
+        <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"/>
+      </svg>
+    </button>
+  } @else {
+    <button class="signin-btn" routerLink="/login">Sign In</button>
+  }
 </header>

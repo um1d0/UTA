@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   templateUrl: './userprofile.html',
   styleUrl: './userprofile.css',
 })
-export class Userprofile {}
+export class Userprofile {
+  logout(){
+   localStorage.removeItem('access_token');
+  }
+}

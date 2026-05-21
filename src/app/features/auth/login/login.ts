@@ -21,8 +21,8 @@ export class Login {
     this.http.post('https://shopapi.stepacademy.ge/api/auth/login',this.LoginData
     ).subscribe({
       next: (data:any) => {
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('refresh_token', data.refresh_token);
+        localStorage.setItem('access_token', data.data.accessToken);
+        localStorage.setItem('refresh_token', data.data.refreshToken);
         this.router.navigateByUrl('/');
       },
        error: () => alert('wrong information'),

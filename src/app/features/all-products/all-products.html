@@ -1,27 +1,26 @@
 <div class="page-wrap">
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <!-- Categories Section -->
     <div class="sidebar-section">
       <div class="sidebar-title">Categories</div>
       <div class="category-item">
-        <label><input type="checkbox" checked /> Laptops</label>
+        <label><input type="checkbox" [checked]="CategoryId() === 1" (change)="getCategory(1)"/> Laptops</label>
         <span class="category-count">12</span>
       </div>
       <div class="category-item">
-        <label><input type="checkbox" /> Smartphones</label>
+        <label><input type="checkbox" [checked]="CategoryId() === 2" (change)="getCategory(2)"/> Smartphones</label>
         <span class="category-count">8</span>
       </div>
       <div class="category-item">
-        <label><input type="checkbox" /> Tablets</label>
+        <label><input type="checkbox" [checked]="CategoryId() === 3" (change)="getCategory(3)"/> Tablets</label>
         <span class="category-count">6</span>
       </div>
       <div class="category-item">
-        <label><input type="checkbox" /> Monitors</label>
+        <label><input type="checkbox" [checked]="CategoryId() === 4" (change)="getCategory(4)"/> Keyboards & Mice</label>
         <span class="category-count">9</span>
       </div>
       <div class="category-item">
-        <label><input type="checkbox" /> Keyboards</label>
+        <label><input type="checkbox" [checked]="CategoryId() === 5" (change)="getCategory(5)"/> Headphones & Audio</label>
         <span class="category-count">5</span>
       </div>
     </div>
@@ -29,36 +28,40 @@
     <!-- Min Rating Section -->
     <div class="sidebar-section">
       <div class="sidebar-title">Min Rating</div>
-      <div class="rating-row">
+      <div class="rating-row"(click)="getRating(5)">
         <span class="stars">★★★★★</span>
         <span class="rating-label">5 stars</span>
       </div>
-      <div class="rating-row">
+      <div class="rating-row"(click)="getRating(4)">
         <span class="stars">★★★★</span><span class="stars" style="opacity: 0.25">★</span>
         <span class="rating-label">4 & up</span>
       </div>
-      <div class="rating-row">
+      <div class="rating-row"(click)="getRating(3)">
         <span class="stars">★★★</span><span class="stars" style="opacity: 0.25">★★</span>
         <span class="rating-label">3 & up</span>
       </div>
-      <div class="rating-row">
+      <div class="rating-row"(click)="getRating(2)">
         <span class="stars">★★</span><span class="stars" style="opacity: 0.25">★★★</span>
         <span class="rating-label">2 & up</span>
       </div>
+      <div class="rating-row" (click)="getRating(1)">
+        <span class="stars">★</span><span class="stars" style="opacity: 0.25">★★★</span>
+        <span class="rating-label">1 & up</span>
+      </div>
     </div>
 
-    <!-- Price Range Section -->
+  
     <div class="sidebar-section">
       <div class="sidebar-title">Price Range</div>
-      <div class="price-row">
+      <form class="price-row">
         <span>$</span>
         <input type="number" placeholder="Min" />
         <span>-</span>
         <input type="number" placeholder="Max" />
-      </div>
+      </form>
     </div>
 
-    <!-- Brand Section -->
+  
     <div class="sidebar-section">
       <div class="sidebar-title">Brand</div>
       <input type="text" class="brand-search" placeholder="Search brand..." />
@@ -67,8 +70,10 @@
     <!-- Availability Section -->
     <div class="sidebar-section">
       <div class="sidebar-title">Availability</div>
-      <label class="avail-label"> <input type="checkbox" checked /> In Stock </label>
-      <label class="avail-label"> <input type="checkbox" /> Out of Stock </label>
+      <label class="avail-label"> <input type="checkbox" [checked]="inStockValue() === true" (change)="getStockStatus(true)"/> In Stock </label>
+      <label class="avail-label">
+        <input type="checkbox" [checked]="inStockValue() === false" (change)="getStockStatus(false)"> Out of Stock
+      </label>
       <button class="clear-btn">Clear All</button>
     </div>
   </aside>
@@ -86,17 +91,17 @@
       </div>
       <div class="header-right">
         <span class="view-count">Results: 120</span>
-        <select class="sort-select">
-          <option>Newest</option>
-          <option>Price: Low to High</option>
-          <option>Price: High to Low</option>
-          <option>Best Rating</option>
-          <option>Most Popular</option>
+        <select class="sort-select" #SortByselect (change)="getSortBy(SortByselect.value)">
+          <option disabled selected>Sort By</option>
+          <option value="Newest | true">Newest</option>
+          <option value="price | false">Price: Low to High</option>
+          <option value="price | true">Price: High to Low</option>
+          <option value="rating | true">Best Rating</option>
+          <option value="name | false">Name: A-Z</option>
         </select>
       </div>
     </div>
 
-   
     <div class="product-grid">
       @if (productsList()) {
         @for (item of productsList().data.items; track item.id) {
@@ -121,9 +126,7 @@
               <div class="product-stars">
                 <span class="star-filled">{{ item.rating | ratingStars }}</span>
 
-                <span class="review-count">
-                ( {{item.rating}} )
-                </span>
+                <span class="review-count"> ( {{ item.rating }} ) </span>
               </div>
               <div class="product-footer">
                 <div class="product-price">{{ item.price }}$</div>
@@ -146,28 +149,29 @@
           </div>
         }
       }
-
-      <!-- Product Card 5 - Out of Stock -->
-      
-
-      <!-- Product Card 6 -->
-      
     </div>
 
-    <!-- Pagination -->
     <div class="pagination">
-      <button class="page-btn arrow" value="-1">◀</button>
-      <button class="page-btn active" value="1">1</button>
-      <button class="page-btn" value="2">2</button>
-      <button class="page-btn" value="3">3</button>
-      <button class="page-btn" value="4">4</button>
-      <button class="page-btn" value="5">5</button>
-      <button class="page-btn arrow" value="1">▶</button>
-      <select class="per-page">
-        <option>12 per page</option>
-        <option>24 per page</option>
-        <option>36 per page</option>
+      <button class="page-btn arrow" (click)="getProductsPreviousPage()">◀</button>
+      @for (button of pages; track button) {
+        <button
+          class="page-btn active"
+          (click)="getProducts(button, this.take)"
+          [class.active]="page === button"
+        >
+          {{ button }}
+        </button>
+      }
+
+      <button class="page-btn arrow" (click)="getProductsNextPage()">▶</button>
+
+      <select class="per-page" #perPageselect (change)="getTakeCount(perPageselect.value)">
+        <option value="12">12 per page</option>
+        <option value="24">24 per page</option>
+        <option value="36">36 per page</option>
       </select>
+      <button (click)="getDescending(true)">Test</button>
+      <button (click)="getDescending(false)">Test 2</button>
     </div>
   </main>
 </div>

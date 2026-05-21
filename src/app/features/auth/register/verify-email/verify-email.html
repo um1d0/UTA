@@ -1,0 +1,57 @@
+<div class="card">
+    <div class="card-top-bar"></div>
+ 
+    <div class="card-body">
+ 
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="M2 7l10 7 10-7"/>
+        </svg>
+      </div>
+ 
+      <h1>Check your inbox</h1>
+ 
+      <p class="subtitle">
+        We sent a 6-digit verification code to<br>
+        <strong> {{GetEmailCode.email}} </strong>
+      </p>
+ <form (ngSubmit)="onSubmit()">
+      <div class="otp-row" >
+        <input class="otp-input" type="text" inputmode="numeric" maxlength="6" placeholder="······" name="code"  [(ngModel)]="GetEmailCode.code" />
+        
+      </div>
+ 
+      <button class="btn-verify" type="submit">Verify email</button>
+ </form>
+      <div class="divider">
+        <div class="divider-line"></div>
+        <span class="divider-text">didn't receive the code?</span>
+        <div class="divider-line"></div>
+      </div>
+ 
+      <div class="resend-row">
+        <span>Check your spam folder or</span>
+        <span class="resend-link">resend code</span>
+      </div>
+ 
+      <div class="back-row">
+        <a class="back-link" routerLink="/register">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 12H5M12 5l-7 7 7 7"/>
+          </svg>
+          Back to sign up
+        </a>
+      </div>
+ 
+    </div>
+ 
+    <div class="card-footer">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="11" width="18" height="11" rx="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      <p>This code expires in 10 minutes. Do not share it with anyone.</p>
+    </div>
+ 
+  </div>

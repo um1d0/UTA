@@ -1,32 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private baseUrl = 'https://shopapi.stepacademy.ge/api/cart';
+  private http = inject(HttpClient);
+  private apiUrl = 'https://shopapi.stepacademy.ge/api/cart';
 
-  constructor(private http: HttpClient) {}
+  addToCart(productId: number, quantity: number = 1) {
+    const params = new HttpParams()
+      .set('productId', productId)
+      .set('quantity', quantity);
 
-  private getHeaders() {
-    const token = localStorage.getItem('access_token');
-    return {
-      'Authorization': `Bearer ${token}`
-    };
+return this.http.post(`${this.apiUrl}/add-to-cart`, { productId, quantity });
   }
 
   getCart() {
-    return this.http.get(this.baseUrl, { headers: this.getHeaders() });
-  }
-
-  addToCart(productId: string, quantity: number) {
-    return this.http.post(`${this.baseUrl}/add-to-cart`, { productId, quantity }, { headers: this.getHeaders() });
-  }
-
-  removeFromCart(productId: string) {
-    return this.http.delete(`${this.baseUrl}/remove-from-cart/${productId}`, { headers: this.getHeaders() });
-  }
-
-  editQuantity(productId: string, quantity: number) {
-    return this.http.put(`${this.baseUrl}/edit-quantity`, { productId, quantity }, { headers: this.getHeaders() });
+    return this.http.get(this.apiUrl);
   }
 }

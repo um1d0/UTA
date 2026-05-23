@@ -21,29 +21,39 @@ export class Cart implements OnInit {
 
   loadCart() {
     this.cartService.getCart().subscribe({
-      next: (data: any) => {
-        this.cartItems = data.items ?? data;
+      next: (response: any) => {
+        this.cartItems = response?.data?.items ?? response?.data ?? response?.items ?? response ?? [];
         this.calculateTotal();
       },
-      error: (err) => console.error(err)
+      error: (error) => {
+        console.error('Could not load cart:', error);
+      },
     });
   }
 
   calculateTotal() {
-    this.total = this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    this.total = this.cartItems.reduce((sum, item) => {
+      const price = item.price ?? item.product?.price ?? 0;
+      const quantity = item.quantity ?? 1;
+
+      return sum + price * quantity;
+    }, 0);
   }
 
   increase(item: any) {
-    this.cartService.editQuantity(item.productId, item.quantity + 1).subscribe(() => this.loadCart());
+    item.quantity += 1;
+    this.calculateTotal();
   }
 
   decrease(item: any) {
     if (item.quantity > 1) {
-      this.cartService.editQuantity(item.productId, item.quantity - 1).subscribe(() => this.loadCart());
+      item.quantity -= 1;
+      this.calculateTotal();
     }
   }
 
   remove(productId: string) {
-    this.cartService.removeFromCart(productId).subscribe(() => this.loadCart());
+    this.cartItems = this.cartItems.filter((item) => item.productId !== productId);
+    this.calculateTotal();
   }
 }

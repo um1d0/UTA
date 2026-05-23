@@ -1,16 +1,27 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { productresponse } from '../../shared/models/auth.model';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { CartService } from '../../shared/services/cart';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ProductsService {
-  private url = 'https://shopapi.stepacademy.ge/api/products';
+export class ProductsComponent {
+  private cartService = inject(CartService);
+  private router = inject(Router);
 
-  constructor(private http: HttpClient) {}
+  addToCart(productId: number): void {
+    const token = localStorage.getItem('access_token');
 
-  getProducts() {
-    return this.http.get<productresponse>(this.url);
+    if (!token) {
+      alert('გთხოვთ პირველად დალოგინდეთ!');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.cartService.addToCart(productId).subscribe({
+      next: (res) => {
+        console.log('Cart-ში დაემატა!', res);
+      },
+      error: (err) => {
+        console.error('შეცდომა:', err);
+      }
+    });
   }
 }

@@ -5,18 +5,14 @@
   </a>
   <nav class="PCnav">
     <a routerLink="/home" routerLinkActive="active">Home</a>
-    <a routerLink="/shop" routerLinkActive="active">Shop</a>
+    <a routerLink="/allproducts" routerLinkActive="active">Shop</a>
 
-    <select name="categories" id="categories">
-      <option value="">Categories</option>
-      <option value="laptops">Laptops</option>
-      <option value="smartphones">Smartphones</option>
-      <option value="monitors">Monitors</option>
-      <option value="keyboards-mice">Keyboards & Mice</option>
-      <option value="headphones-audio">Headphones & Audio</option>
-      <option value="graphics-cards">Graphics Cards</option>
-      <option value="storage">Storage</option>
-      <option value="networking">Networking</option>
+    <select name="categories" id="categories" #categories (change)="getCategory(categories.value)">
+      <option disabled selected>Categories</option>
+      @for (item of Category(); track item.id) {
+        <option value="{{item.id}}">{{item.name}}</option>
+      }
+     
     </select>
 
     <a routerLink="/about" routerLinkActive="active">About</a>
@@ -38,7 +34,7 @@
         <circle cx="11" cy="11" r="8" />
         <line x1="21" y1="21" x2="16.65" y2="16.65" />
       </svg>
-      <input type="text" placeholder="Search products..." />
+      <input type="text" placeholder="Search products..." #MobileSearch (change)="Search(MobileSearch.value)"/>
     </div>
 
     <div class="mobile-nav-links">
@@ -97,7 +93,7 @@
       <circle cx="11" cy="11" r="8" />
       <line x1="21" y1="21" x2="16.65" y2="16.65" />
     </svg>
-    <input type="text" placeholder="Search products..." class="searchbar"/>
+    <input type="text" placeholder="Search products..." class="searchbar" #PCSearch (change)="Search(PCSearch.value)"/>
   </div>
 
   <a routerLink="/cart" class="CartBtn-a">

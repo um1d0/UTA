@@ -10,14 +10,14 @@
  
   <div class="cat-grid">
  
-    <a class="cat-card" href="#">
+    <a class="cat-card" (click)="getCategory(1)">
       <div class="cat-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="4" width="20" height="13" rx="2"/><path d="M1 21h22"/>
         </svg>
       </div>
       <div class="cat-info">
-        <div class="cat-name">Laptops</div>
+        <div class="cat-name" >Laptops</div>
         <div class="cat-count">6 products</div>
       </div>
       <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -25,7 +25,7 @@
       </svg>
     </a>
  
-    <a class="cat-card" href="#">
+    <a class="cat-card" (click)="getCategory(2)">
       <div class="cat-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="17" r="1" fill="currentColor"/>
@@ -40,7 +40,7 @@
       </svg>
     </a>
  
-    <a class="cat-card active" href="#">
+    <a class="cat-card" (click)="getCategory(3)">
       <div class="cat-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
@@ -55,7 +55,7 @@
       </svg>
     </a>
  
-    <a class="cat-card" href="#">
+    <a class="cat-card" (click)="getCategory(4)">
       <div class="cat-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="7" width="20" height="14" rx="3"/><path d="M8 11h.01M12 11h.01M16 11h.01M8 15h8"/>

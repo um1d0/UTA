@@ -3,11 +3,16 @@
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-title">Categories</div>
-      <div class="category-item">
-        <label><input type="checkbox" [checked]="CategoryId() === 1" (change)="getCategory(1)"/> Laptops</label>
-        <span class="category-count">12</span>
+      @for (item of Category(); track item.id) {
+        <div class="category-item">
+        <label><input type="checkbox" [checked]="CategoryId() === item.id" (change)="getCategory(item.id)"/> {{item.name}}</label>
+        <span class="category-count">{{item.productCount}}</span>
       </div>
-      <div class="category-item">
+      }
+      
+      
+      
+      <!-- <div class="category-item">
         <label><input type="checkbox" [checked]="CategoryId() === 2" (change)="getCategory(2)"/> Smartphones</label>
         <span class="category-count">8</span>
       </div>
@@ -22,7 +27,7 @@
       <div class="category-item">
         <label><input type="checkbox" [checked]="CategoryId() === 5" (change)="getCategory(5)"/> Headphones & Audio</label>
         <span class="category-count">5</span>
-      </div>
+      </div> -->
     </div>
 
     <!-- Min Rating Section -->
@@ -53,18 +58,18 @@
   
     <div class="sidebar-section">
       <div class="sidebar-title">Price Range</div>
-      <form class="price-row">
+      <form class="price-row" #PriceRange="ngForm">
         <span>$</span>
-        <input type="number" placeholder="Min" />
+        <input type="number" placeholder="Min" #MinPrice  (input)="autoSubmitPriceRange(MinPrice.value,this.MaxPriceSignal())"/>
         <span>-</span>
-        <input type="number" placeholder="Max" />
+        <input type="number" #MaxPrice (input)="autoSubmitPriceRange(this.MinPriceSignal(),MaxPrice.value)" placeholder="Max" />
       </form>
     </div>
 
   
     <div class="sidebar-section">
       <div class="sidebar-title">Brand</div>
-      <input type="text" class="brand-search" placeholder="Search brand..." />
+      <input type="text" class="brand-search" #BrandNameInput placeholder="Search brand..." (input)="getBrandName(BrandNameInput.value)"/>
     </div>
 
     <!-- Availability Section -->
@@ -80,17 +85,17 @@
 
   <!-- MAIN CONTENT -->
   <main class="main">
-    <!-- Header with Search and Sort -->
+    
     <div class="main-header">
       <div class="search-bar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+       <button type="submit"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="8"></circle>
           <path d="m21 21-4.35-4.35"></path>
-        </svg>
-        <input type="text" placeholder="Search products..." />
+        </svg></button>
+        <input type="text" placeholder="Search products..." #Search (input)="getSearch(Search.value)" value="{{SearchSignal()}}"/>
       </div>
       <div class="header-right">
-        <span class="view-count">Results: 120</span>
+        <span class="view-count">{{TotalProductsSignal()}} Products</span>
         <select class="sort-select" #SortByselect (change)="getSortBy(SortByselect.value)">
           <option disabled selected>Sort By</option>
           <option value="Newest | true">Newest</option>
@@ -131,7 +136,7 @@
               <div class="product-footer">
                 <div class="product-price">{{ item.price }}$</div>
                 @if (item.stock >= 1) {
-                  <button class="add-btn">
+                  <button class="add-btn" (click)="addToCart(item.id)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <circle cx="9" cy="21" r="1"></circle>
                       <circle cx="20" cy="21" r="1"></circle>
@@ -170,8 +175,7 @@
         <option value="24">24 per page</option>
         <option value="36">36 per page</option>
       </select>
-      <button (click)="getDescending(true)">Test</button>
-      <button (click)="getDescending(false)">Test 2</button>
+      
     </div>
   </main>
 </div>

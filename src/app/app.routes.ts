@@ -10,6 +10,7 @@ import { Userprofile } from './features/auth/userprofile/userprofile';
 import { AllProducts } from './features/all-products/all-products';
 import { authGuard } from './shared/guards/auth-guard';
 import { VerifyEmail } from './features/auth/register/verify-email/verify-email';
+import { Favorites } from './features/auth/userprofile/favorites/favorites';
 
 
 export const routes: Routes = [
@@ -24,4 +25,5 @@ export const routes: Routes = [
     {path:'userprofile',component:Userprofile},
     {path:'allproducts',component:AllProducts},
     {path:'verify-email',component:VerifyEmail},
+    {path:'favorites',component:Favorites}
 ];

@@ -113,10 +113,20 @@
           <div class="product-card">
             @if (item.stock >= 1) {
               <div class="product-img-placeholder">
+                <button class="favorite-btn" type="button" aria-label="Add to favorites" (click)="addFavorite(item.id)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
+                  </svg>
+                </button>
                 <img src="{{ item.imageUrl }}" alt="{{ item.name }}" />
               </div>
             } @else {
               <div class="product-img-placeholder sold-out">
+                <button class="favorite-btn" type="button" aria-label="Add to favorites" (click)="addFavorite(item.id)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
+                  </svg>
+                </button>
                 <img src="{{ item.imageUrl }}" alt="{{ item.name }}" />
                 <div class="sold-out-badge">Sold Out</div>
                 <div class="sold-overlay"><span>Sold Out</span></div>

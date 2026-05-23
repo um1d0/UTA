@@ -1,29 +1,24 @@
 <div class="cart-container">
   <h2>Your Cart</h2>
 
-  @if (cartItems.length === 0) {
-    <div class="empty-cart">
-      <p>Your cart is empty.</p>
-      <button class="btn-primary" routerLink="/allproducts">Continue Shopping</button>
-    </div>
-  } @else {
+
     <div class="cart-items">
-      @for (item of cartItems; track item.productId) {
+      @for (item of cartItems; track $index) {
         <div class="cart-item">
-          <img [src]="item.imageUrl ?? item.product?.imageUrl" [alt]="item.name ?? item.product?.name" />
+          <img [src]="getItemImage(item)" [alt]="getItemName(item)" />
 
           <div class="item-info">
-            <h3>{{ item.name ?? item.product?.name }}</h3>
-            <p class="item-price">{{ item.price ?? item.product?.price | currency }}</p>
+            <h3>{{ getItemName(item) }}</h3>
+            <p class="item-price">{{ getItemPrice(item) | currency }}</p>
           </div>
 
           <div class="item-actions">
             <button class="qty-btn" type="button" (click)="decrease(item)">-</button>
-            <span class="quantity">{{ item.quantity }}</span>
+            <span class="quantity">{{ getItemQuantity(item) }}</span>
             <button class="qty-btn" type="button" (click)="increase(item)">+</button>
           </div>
 
-          <button class="remove-btn" type="button" (click)="remove(item.productId)">Remove</button>
+          <button class="remove-btn" type="button" (click)="remove(getItemId(item))">Remove</button>
         </div>
       }
     </div>
@@ -36,5 +31,5 @@
 
       <button class="btn-primary" type="button">Proceed to Checkout</button>
     </div>
-  }
+  
 </div>

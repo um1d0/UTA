@@ -1,0 +1,140 @@
+.favorites-card {
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.favorites-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.favorites-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2d0057;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.favorites-header svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.favorites-header p,
+.favorites-state p {
+  color: #6c757d;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.refresh-btn,
+.shop-link,
+.remove-btn {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.refresh-btn,
+.shop-link {
+  background: #2d0057;
+  color: #fff;
+  padding: 10px 14px;
+}
+
+.favorites-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px;
+  border: 1px dashed #d0d0d0;
+  border-radius: 10px;
+  background: #f8f9fa;
+  color: #6c757d;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.favorite-item {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.favorite-image {
+  aspect-ratio: 1;
+  background: #f8f9fa;
+}
+
+.favorite-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.favorite-info {
+  padding: 12px;
+  flex: 1;
+}
+
+.favorite-info h3 {
+  color: #1a1a1a;
+  font-size: 13px;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.favorite-info p {
+  color: #2d0057;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.remove-btn {
+  margin: 0 12px 12px;
+  padding: 10px;
+  background: #fff0f0;
+  color: #dc3545;
+}
+
+.remove-btn:hover {
+  background: #dc3545;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .favorites-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .refresh-btn,
+  .shop-link {
+    width: 100%;
+    text-align: center;
+  }
+}

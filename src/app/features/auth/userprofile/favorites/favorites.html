@@ -1,0 +1,46 @@
+<section class="favorites-card" id="favorites">
+  <div class="favorites-header">
+    <div>
+      <h2>
+        <svg viewBox="0 0 24 24">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+        Favorites
+      </h2>
+      <p>Your saved products</p>
+    </div>
+
+    <button class="refresh-btn" type="button" (click)="getFavorites()">Refresh</button>
+  </div>
+
+  @if (errorMessage) {
+    <div class="favorites-state">
+      <p>{{ errorMessage }}</p>
+      <button class="refresh-btn" type="button" (click)="getFavorites()">Try Again</button>
+    </div>
+  } @else if (favorites.length === 0) {
+    <div class="favorites-state">
+      <p>You do not have favorite products yet.</p>
+      <a class="shop-link" routerLink="/allproducts">Browse Products</a>
+    </div>
+  } @else {
+    <div class="favorites-grid">
+      @for (item of favorites; track $index) {
+        <article class="favorite-item">
+          <div class="favorite-image">
+            <img [src]="getProductImage(item)" [alt]="getProductName(item)" />
+          </div>
+
+          <div class="favorite-info">
+            <h3>{{ getProductName(item) }}</h3>
+            <p>{{ getProductPrice(item) | currency }}</p>
+          </div>
+
+          <button class="remove-btn" type="button" (click)="removeFavorite(getProductId(item))">
+            Remove
+          </button>
+        </article>
+      }
+    </div>
+  }
+</section>

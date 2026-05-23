@@ -11,7 +11,7 @@ export class CartService {
       .set('productId', productId)
       .set('quantity', quantity);
 
-return this.http.post(`${this.apiUrl}/add-to-cart`, { productId, quantity });
+    return this.http.post(`${this.apiUrl}/add-to-cart`, { productId, quantity }, { params });
   }
 
   getCart() {

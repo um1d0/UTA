@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-userprofile',
-  imports: [],
+  imports: [FormsModule, RouterLink],
   templateUrl: './userprofile.html',
   styleUrl: './userprofile.css',
 })
@@ -46,48 +49,47 @@ export class Userprofile implements OnInit {
     });
   }
 
- saveProfile(): void {
-  this.isSaving.set(true);
-  this.saveMessage.set('');
+  saveProfile(): void {
+    this.isSaving.set(true);
+    this.saveMessage.set('');
 
-  const details = {
-    phoneNumber: this.toNullableString(this.profileForm.phoneNumber),
-    address: this.toNullableString(this.profileForm.address),
-    pictureUrl: this.toNullableString(this.profileForm.pictureUrl),
-    dob: this.toIsoDateTime(this.profileForm.dateOfBirth),
-  };
+    const details = {
+      phoneNumber: this.toNullableString(this.profileForm.phoneNumber),
+      address: this.toNullableString(this.profileForm.address),
+      pictureUrl: this.toNullableString(this.profileForm.pictureUrl),
+      dob: this.toIsoDateTime(this.profileForm.dateOfBirth),
+    };
 
-  const payload = {
-    firstName: this.profileForm.firstName.trim(),
-    lastName: this.profileForm.lastName.trim(),
-    email: this.profileForm.email.trim(),
-    details,
-  };
+    const payload = {
+      firstName: this.profileForm.firstName.trim(),
+      lastName: this.profileForm.lastName.trim(),
+      email: this.profileForm.email.trim(),
+      details,
+    };
 
-  this.http.put('https://shopapi.stepacademy.ge/api/users', payload).subscribe({
-    next: (response: any) => {
-      // Build a merged user from current state + what we just sent
-      const currentUser = this.user() ?? {};
-      const mergedUser = {
-        ...currentUser,
-        ...payload,
-        details: {
-          ...(currentUser?.details ?? {}),
-          ...details,
-        },
-      };
+    this.http.put('https://shopapi.stepacademy.ge/api/users', payload).subscribe({
+      next: (response: any) => {
+        const currentUser = this.user() ?? {};
+        const mergedUser = {
+          ...currentUser,
+          ...payload,
+          details: {
+            ...(currentUser?.details ?? {}),
+            ...details,
+          },
+        };
 
-      const savedUser = response?.data ?? (this.hasProfileData(response) ? response : mergedUser);
-      this.applyProfile(savedUser);
-      this.isSaving.set(false);
-      this.saveMessage.set('Profile updated successfully.');
-    },
-    error: (error: any) => {
-      this.isSaving.set(false);
-      this.saveMessage.set(error?.error?.message ?? 'Profile could not be updated.');
-    },
-  });
-}
+        const savedUser = response?.data ?? (this.hasProfileData(response) ? response : mergedUser);
+        this.applyProfile(savedUser);
+        this.isSaving.set(false);
+        this.saveMessage.set('Profile updated successfully.');
+      },
+      error: (error: any) => {
+        this.isSaving.set(false);
+        this.saveMessage.set(error?.error?.message ?? 'Profile could not be updated.');
+      },
+    });
+  }
 
   logout(): void {
     localStorage.removeItem('access_token');
@@ -121,7 +123,9 @@ export class Userprofile implements OnInit {
       phoneNumber: nextUser?.details?.phoneNumber ?? this.profileForm.phoneNumber,
       address: nextUser?.details?.address ?? this.profileForm.address,
       pictureUrl: nextUser?.details?.pictureUrl ?? this.profileForm.pictureUrl,
-      dateOfBirth: this.toDateInputValue(nextUser?.details?.dob ?? this.profileForm.dateOfBirth),
+      dateOfBirth: this.toDateInputValue(
+        nextUser?.details?.dob ?? nextUser?.details?.dateOfBirth ?? this.profileForm.dateOfBirth
+      ),
     };
   }
 
@@ -135,8 +139,7 @@ export class Userprofile implements OnInit {
   }
 
   private toNullableString(value: string): string | null {
-    const trimmedValue = value.trim();
-    return trimmedValue || null;
+    return value.trim() || null;
   }
 
   private toIsoDateTime(value: string): string | null {

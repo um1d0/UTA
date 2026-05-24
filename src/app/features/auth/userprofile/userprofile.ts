@@ -1,11 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-userprofile',
-  imports: [FormsModule, RouterLink],
+  imports: [],
   templateUrl: './userprofile.html',
   styleUrl: './userprofile.css',
 })

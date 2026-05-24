@@ -280,6 +280,27 @@ export class AllProducts implements OnInit {
       error: (error) => {
         console.log(error, this.Category());
       },
+   
+    });
+  }
+  addFavorite(productId: number) {
+    const token = localStorage.getItem('access_token');
+
+    if (!token) {
+      alert('You have to login first!');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.http.post(`https://shopapi.stepacademy.ge/api/favorites/${productId}`, {}).subscribe({
+      next: (data: any) => {
+        console.log('Added to favorites', data);
+        alert('Product added to favorites!');
+      },
+      error: (error) => {
+        console.error('Could not add favorite:', error);
+        alert(error?.error?.message ?? 'Could not add product to favorites.');
+      },
     });
   }
 }

@@ -1,124 +1,149 @@
-:host{
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    width: 100%;
-    height: 100vh;
-    position: sticky;
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  background: var(--color-page-bg);
 }
 
+.LogInForm,
+.LogInForm form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.LogInForm form,
+.LogInForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.LogInForm {
+  background-color: #ffffff;
+  padding: 36px;
+  border: 1px solid rgba(45, 0, 87, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(45, 0, 87, 0.1);
+}
 
 .welcometext {
-    font-family: 'Poppins', sans-serif; /* თუ არ გაქვს Poppins, გამოიყენებს ჩვეულებრივ Sans-serif-ს */
-    color: #2D0057; /* შენი იასამნისფერი */
-    font-size: 2.3rem;
-    font-weight: 600;
-    display: flex;
-    justify-content: center;
-}
-/* მთლიანი გვერდის ცენტრირება */
-/* კონტეინერი, რომელიც ფორმას შუაში მოაქცევს Header-სა და Footer-ს შორის */
-.login-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 20px;
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-primary);
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
-/* ლოგინის ფორმის სტილი */
-.LogInForm {
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* რბილი ჩრდილი */
-    width: 100%;
-    max-width: 380px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-/* ინპუტების დიზაინი */
 .LogInForm input {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #D0D0D0; /* შენი ფერი */
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s ease;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 14px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text-heading);
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .LogInForm input:focus {
-    border-color: #2D0057; /* ფოკუსისას შენი იასამნისფერი */
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(45, 0, 87, 0.1);
 }
 
-/* შეცდომის შეტყობინება */
-.LogInForm span {
-    color: #d9534f;
-    font-size: 12px;
-    margin-top: -10px;
-}
-
-/* ღილაკების საერთო სტილი */
-.LogInForm button {
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-}
-
-/* Log In ღილაკი (მთავარი) */
-.logInbtn {
-    background-color: #2D0057; /* შენი მუქი იასამნისფერი */
-    color: #ffffff;
-    margin-top: 10px;
-}
-
-.logInbtn:hover:not(:disabled) {
-    background-color: #450085;
-    transform: translateY(-2px);
-}
-
-.logInbtn:disabled {
-    background-color: #D0D0D0;
-    color: #888;
-    cursor: not-allowed;
-}
-
-/* Register ღილაკი (ზუსტად Log In-ის ნაირი) */
-.registrationbtn {
-  /* სტილის კოპირება Log In-დან */
-  display: inline-block;
+.field-error {
+  display: block;
   width: 100%;
-  box-sizing: border-box;
-  padding: 14px; /* ზუსტად ისე, როგორც .logInForm button-ს */
+  margin: -6px 0 2px;
+  color: #c62828;
+  background: #fff5f5;
+  border: 1px solid #f1b5b5;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: -2px;
+}
+
+.forgot-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 2px;
+  color: #5f4b72;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.forgot-link:hover {
+  color: var(--color-primary);
+}
+
+.LogInForm button,
+.registrationbtn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 16px;
+  border: none;
   border-radius: 8px;
+  background-color: var(--color-primary);
+  color: #ffffff;
   font-size: 16px;
   font-weight: 600;
+  line-height: 1.2;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-  margin-top: 10px;
-
-  /* განსხვავებული ფერი (მაგალითად, მუქი ნაცრისფერი/ნახშირისფერი) */
-  background-color: #2D0057; 
-  color: #ffffff;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-/* Hover ეფექტი */
+.LogInForm button:hover,
 .registrationbtn:hover {
-  background-color: #1e293b; /* ოდნავ მუქი ჰოვერზე */
-  transform: translateY(-2px); /* როგორც Log In-ს აქვს */
+  background-color: var(--color-primary-light);
+  box-shadow: 0 8px 18px rgba(45, 0, 87, 0.18);
+  transform: translateY(-1px);
 }
 
-/* Active ეფექტი */
-.registrationbtn:active {
-  transform: translateY(0);
+.LogInForm a.registrationbtn {
+  background-color: #ffffff;
+  color: var(--color-primary);
+  border: 1px solid rgba(45, 0, 87, 0.18);
+}
+
+.LogInForm a.registrationbtn:hover {
+  background-color: var(--color-hover-bg);
+}
+
+@media (max-width: 520px) {
+  :host {
+    padding: 16px;
+  }
+
+  .LogInForm {
+    padding: 28px 22px;
+  }
+
+  .welcometext {
+    font-size: 1.65rem;
+  }
 }

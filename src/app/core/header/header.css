@@ -435,7 +435,7 @@ header .openMobMenu {
   color: #2d0057;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 980px) {
   .PCnav {
     display: none;
   }

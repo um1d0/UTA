@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { of } from 'rxjs';
 
 import { Register } from './register';
@@ -11,28 +11,23 @@ describe('Register', () => {
   let fixture: ComponentFixture<Register>;
   let auth: Auth;
   let httpClient: { post: ReturnType<typeof vi.fn> };
-  let router: { navigateByUrl: ReturnType<typeof vi.fn> };
+  let router: Router;
 
   beforeEach(async () => {
     httpClient = {
       post: vi.fn(() => of(null)),
     };
-    router = {
-      navigateByUrl: vi.fn(),
-    };
 
     await TestBed.configureTestingModule({
       imports: [Register],
-      providers: [
-        Auth,
-        { provide: HttpClient, useValue: httpClient },
-        { provide: Router, useValue: router },
-      ],
+      providers: [provideRouter([]), Auth, { provide: HttpClient, useValue: httpClient }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Register);
     component = fixture.componentInstance;
     auth = TestBed.inject(Auth);
+    router = TestBed.inject(Router);
+    vi.spyOn(router, 'navigateByUrl').mockResolvedValue(true);
     await fixture.whenStable();
   });
 

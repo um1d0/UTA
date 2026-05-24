@@ -1,29 +1,37 @@
+<div class="LogInForm">
+  <form (ngSubmit)="onSubmit()" #logInForm="ngForm">
+    <h1 class="welcometext">Welcome, glad to see you back.</h1>
 
-<form (ngSubmit)="onSubmit()" #logInForm="ngForm" class="LogInForm">
-  <h1 class="welcometext">Welcome, glad to see you back.</h1>
-  <input type="email" placeholder="Email" [(ngModel)]="LoginData.email" #emailInput="ngModel" name="email" required/>
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="LoginData.email"
+      #emailInput="ngModel"
+      name="email"
+      required
+    />
+    @if (emailInput.invalid && emailInput.touched) {
+      <p class="field-error">Enter Email</p>
+    }
 
-  @if (emailInput.invalid && emailInput.touched) {
-    <span>Enter Email</span>
-  }
-  <input
-    type="password"
-    placeholder="Password"
-    required
-    [(ngModel)]="LoginData.password"
-    #passwordInput="ngModel"
-    name="password"
-    required
-    minlength="8"
-  />
-  @if (passwordInput.hasError('required') && passwordInput.touched) {
-    <span>Enter Password</span>
-  }
-  
+    <input
+      type="password"
+      placeholder="Password"
+      required
+      [(ngModel)]="LoginData.password"
+      #passwordInput="ngModel"
+      name="password"
+      minlength="8"
+    />
+    @if (passwordInput.hasError('required') && passwordInput.touched) {
+      <p class="field-error">Enter Password</p>
+    }
+
+    <div class="forgot-row">
+      <a class="forgot-link" routerLink="/forgot-password">Forgot password?</a>
+    </div>
+
     <a class="registrationbtn" routerLink="/register" routerLinkActive="active">register</a>
-
-
-  <button type="submit" class="logInbtn" [disabled]="logInForm.invalid">Log in</button>
-  <div class="login-wrapper">
-   </div>
-</form>
+    <button type="submit" class="registrationbtn">Log in</button>
+  </form>
+</div>

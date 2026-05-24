@@ -10,18 +10,23 @@ import { Userprofile } from './features/auth/userprofile/userprofile';
 import { AllProducts } from './features/all-products/all-products';
 import { authGuard } from './shared/guards/auth-guard';
 import { VerifyEmail } from './features/auth/register/verify-email/verify-email';
-
+import { ProductDetails } from './features/product-details/product-details';
+import { Favorites } from './features/favorites/favorites';
+import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
 
 export const routes: Routes = [
-    {path:'',component:Home,pathMatch:'full'},
-    {path:'home',component:Home},
-    {path:'about',component:About},
-    {path:'contact',component:Contact},
-    {path:'cart',component:Cart, canActivate:[authGuard]},
-    {path:'auth',component:Auth},
-    {path:'login',component:Login},
-    {path:'register',component:Register},
-    {path:'userprofile',component:Userprofile},
-    {path:'allproducts',component:AllProducts},
-    {path:'verify-email',component:VerifyEmail},
+  { path: '', component: Home, pathMatch: 'full' },
+  { path: 'home', component: Home },
+  { path: 'about', component: About },
+  { path: 'contact', component: Contact },
+  { path: 'cart', component: Cart, canActivate: [authGuard] },
+  { path: 'auth', component: Auth },
+  { path: 'login', component: Login },
+  { path: 'register', component: Register },
+  { path: 'userprofile', component: Userprofile, canActivate: [authGuard] },
+  { path: 'allproducts', component: AllProducts },
+  { path: 'products/:id', component: ProductDetails },
+  { path: 'favorites', component: Favorites, canActivate: [authGuard] },
+  { path: 'verify-email', component: VerifyEmail },
+  { path: 'forgot-password', component: ForgotPassword },
 ];

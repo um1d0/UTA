@@ -1,0 +1,128 @@
+<div class="details-page">
+  <a class="back-link" routerLink="/allproducts">Back to products</a>
+
+  @if (product()) {
+    <section class="details-layout">
+      <div class="gallery">
+        <div class="main-image">
+          <img [src]="selectedImage()" [alt]="product().name" />
+        </div>
+
+        @if (getImages(product()).length > 1) {
+          <div class="thumb-row">
+            @for (image of getImages(product()); track image) {
+              <button
+                class="thumb"
+                type="button"
+                [class.active]="selectedImage() === image"
+                (click)="selectedImage.set(image)"
+              >
+                <img [src]="image" [alt]="product().name" />
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="details-info">
+        <div class="category">{{ product().category?.name }}</div>
+        <h1>{{ product().name }}</h1>
+        <p class="brand">{{ product().brand }} {{ product().model }}</p>
+        <p class="rating">Rating: {{ product().rating }} / 5</p>
+        <p class="price">{{ product().price | currency }}</p>
+        <button class="favorite-btn" type="button" (click)="toggleFavorite()">
+          {{ product().isFavorite ? '♥ Remove from favorites' : '♡ Add to favorites' }}
+        </button>
+
+        @if (product().description) {
+          <p class="description">{{ product().description }}</p>
+        }
+
+        <div class="stock" [class.out]="product().stock < 1">
+          {{ product().stock > 0 ? 'In stock: ' + product().stock : 'Out of stock' }}
+        </div>
+
+        <button
+          class="add-btn"
+          type="button"
+          [disabled]="product().stock < 1"
+          (click)="addToCart(product().id)"
+        >
+          Add to Cart
+        </button>
+
+        @if (product().specifications) {
+          <div class="specs">
+            <h2>Specifications</h2>
+            @for (spec of product().specifications | keyvalue; track spec.key) {
+              <div class="spec-row">
+                <span>{{ spec.key }}</span>
+                <strong>{{ spec.value }}</strong>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="reviews">
+      <div class="reviews-header">
+        <div>
+          <span class="reviews-eyebrow">Customer Reviews</span>
+          <h2>Rate this product</h2>
+        </div>
+        <div class="average-rating">
+          <strong>{{ product().rating }}</strong>
+          <span>/ 5</span>
+        </div>
+      </div>
+
+      <form class="review-form" (ngSubmit)="submitReview()">
+        <div class="rating-control">
+          <label>Your rating</label>
+          <div class="star-picker" role="radiogroup" aria-label="Your rating">
+            @for (rate of ratingOptions; track rate) {
+              <button
+                class="star-button"
+                type="button"
+                [class.active]="reviewRate() >= rate"
+                [attr.aria-label]="rate + ' stars'"
+                (click)="reviewRate.set(rate)"
+              >
+                ★
+              </button>
+            }
+            <span class="selected-rating">{{ reviewRate() }} / 5</span>
+          </div>
+        </div>
+        <div class="review-actions">
+          <button class="review-btn" type="submit">
+            {{ currentUserReview() ? 'Update rating' : 'Save rating' }}
+          </button>
+          @if (currentUserReview()) {
+            <button class="review-btn ghost" type="button" (click)="deleteReview()">
+              Delete my rating
+            </button>
+          }
+        </div>
+      </form>
+
+      @if (reviewMessage()) {
+        <p class="review-message">{{ reviewMessage() }}</p>
+      }
+
+      <div class="review-list">
+        @if (reviews().length) {
+          @for (review of reviews(); track review.id) {
+            <div class="review-item">
+              <strong>{{ review.rating }} / 5</strong>
+              <span>{{ review.user?.firstName || review.user?.email || 'User' }}</span>
+            </div>
+          }
+        } @else {
+          <p class="empty-reviews">No reviews yet.</p>
+        }
+      </div>
+    </section>
+  }
+</div>

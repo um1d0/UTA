@@ -1,0 +1,40 @@
+<section class="favorites-page">
+  <div class="favorites-header">
+    <div>
+      <h1>Favorites</h1>
+      <p>Your saved products</p>
+    </div>
+    <a routerLink="/allproducts">Continue shopping</a>
+  </div>
+
+  @if (message()) {
+    <p class="message">{{ message() }}</p>
+  }
+
+  @if (products().length) {
+    <div class="favorites-grid">
+      @for (product of products(); track product.id) {
+        <article class="favorite-card">
+          <a [routerLink]="['/products', product.id]" class="image-wrap">
+            <img [src]="product.imageUrl" [alt]="product.name" />
+          </a>
+          <div class="favorite-info">
+            <a class="product-name" [routerLink]="['/products', product.id]">{{ product.name }}</a>
+            <p>{{ product.price }}$</p>
+            <div class="favorite-actions">
+              <button type="button" (click)="addToCart(product.id)" [disabled]="product.stock < 1">
+                Add to Cart
+              </button>
+              <button class="ghost" type="button" (click)="removeFavorite(product.id)">Remove</button>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="empty-state">
+      <h2>No favorite products yet</h2>
+      <a routerLink="/allproducts">Browse products</a>
+    </div>
+  }
+</section>

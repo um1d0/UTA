@@ -1,6 +1,11 @@
 <div class="page-wrap">
   <!-- SIDEBAR -->
-  <aside class="sidebar">
+  <button class="filter-toggle" type="button" (click)="filtersOpen.update(open => !open)">
+    <span>{{ filtersOpen() ? 'Hide filters' : 'Show filters' }}</span>
+    <strong>{{ filtersOpen() ? '▲' : '▼' }}</strong>
+  </button>
+
+  <aside class="sidebar" [class.open]="filtersOpen()">
     <div class="sidebar-section">
       <div class="sidebar-title">Categories</div>
       @for (item of Category(); track item.id) {
@@ -111,6 +116,9 @@
       @if (productsList()) {
         @for (item of productsList().data.items; track item.id) {
           <div class="product-card">
+            <button class="favorite-card-btn" type="button" (click)="toggleFavorite(item)">
+              {{ item.isFavorite ? '♥' : '♡' }}
+            </button>
             @if (item.stock >= 1) {
               <div class="product-img-placeholder">
                 <img src="{{ item.imageUrl }}" alt="{{ item.name }}" />
@@ -127,7 +135,9 @@
               <div class="product-tags">
                 <span class="tag">{{ item.category.name }}</span>
               </div>
-              <h3 class="product-name">{{ item.name }}</h3>
+              <a class="product-name product-link" [routerLink]="['/products', item.id]">
+                {{ item.name }}
+              </a>
               <div class="product-stars">
                 <span class="star-filled">{{ item.rating | ratingStars }}</span>
 

@@ -434,6 +434,9 @@ header .openMobMenu {
   background: #f3eeff;
   color: #2d0057;
 }
+.user-icon-btn {
+  background-color: transparent;
+}
 
 @media (max-width: 980px) {
   .PCnav {

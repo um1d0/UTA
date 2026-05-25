@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectorRef } from '@angular/core';
 import { PipeNamePipe } from '../../pipe-name-pipe';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ export class AllProducts implements OnInit {
   private router = inject(Router);
   private cartService = inject(CartService);
   private favoritesService = inject(FavoritesService);
+  private cdr = inject(ChangeDetectorRef);
 
   productsList = signal<any>(null);
   page = 1;
@@ -39,10 +40,23 @@ export class AllProducts implements OnInit {
     this.route.queryParamMap.subscribe((params) => {
       const searchParam = params.get('search') ?? undefined;
       const categoryIdParam = params.get('categoryid') ?? params.get('categoryId');
+      const SortByParam = params.get('SortBy') ?? undefined;
+      const SortDescendingParam = params.get('SortDescending') ?? undefined;
 
       this.SearchSignal.set(searchParam);
       this.CategoryId.set(categoryIdParam ? Number(categoryIdParam) : undefined);
-      this.getProducts(1, this.take);
+      this.SortBySignal.set(SortByParam);
+      this.SortDescending.set(SortDescendingParam === 'true');
+
+      this.getProducts(
+        1,
+        this.take,
+        this.inStockValue(),
+        this.CategoryId(),
+        this.RatingSignal(),
+        SortDescendingParam === 'true' ? true : undefined,
+        SortByParam,
+      );
     });
   }
 
@@ -262,6 +276,7 @@ export class AllProducts implements OnInit {
     request.subscribe({
       next: () => {
         product.isFavorite = !product.isFavorite;
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.error('favorite mistake:', err);
@@ -280,7 +295,6 @@ export class AllProducts implements OnInit {
       error: (error) => {
         console.log(error, this.Category());
       },
-   
     });
   }
   addFavorite(productId: number) {

@@ -1,0 +1,219 @@
+<div class="home-wrap">
+
+  <!-- ===== FEATURED PRODUCTS ===== -->
+  <section class="home-section">
+    <div class="section-header">
+      <div>
+        <div class="section-label">HAND PICKED</div>
+        <h2 class="section-title">Featured Products</h2>
+        <p class="section-sub">Handpicked tech essentials just for you</p>
+      </div>
+      <a class="view-all-link" [routerLink]="['/allproducts']">View All →</a>
+    </div>
+
+    <div class="product-grid">
+      @if (featuredLoading()) {
+        @for (s of skeletons; track s) {
+          <div class="product-card skeleton-card">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-body">
+              <div class="skeleton-line short"></div>
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line mid"></div>
+              <div class="skeleton-line short"></div>
+            </div>
+          </div>
+        }
+      } @else {
+        @for (item of featuredProducts(); track item.id) {
+          <div class="product-card">
+            <!-- Bookmark favorite button -->
+            <button class="favorite-card-btn" type="button" (click)="toggleFavorite(item)" [class.is-favorite]="item.isFavorite" aria-label="Add to favorites">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+
+            <div class="product-img-placeholder" [class.sold-out]="item.stock < 1">
+              @if (item.stock < 1) {
+                <div class="sold-out-badge">Sold Out</div>
+                <div class="sold-overlay"><span>Sold Out</span></div>
+              }
+              <img [src]="item.imageUrl" [alt]="item.name" loading="lazy" />
+            </div>
+
+            <div class="product-info">
+              <div class="product-tags">
+                <span class="tag">{{ item.category?.name }}</span>
+              </div>
+              <a class="product-name product-link" [routerLink]="['/products', item.id]">{{ item.name }}</a>
+              <div class="product-stars">
+                <span class="star-filled">{{ item.rating | ratingStars }}</span>
+                <span class="review-count">( {{ item.rating }} )</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">{{ item.price }}$</div>
+                @if (item.stock >= 1) {
+                  <button class="add-btn" (click)="addToCart(item.id)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    Add to Cart
+                  </button>
+                } @else {
+                  <button class="out-btn">Out of Stock</button>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </section>
+
+  <!-- ===== PROMO BANNER ===== -->
+  <section class="promo-banner">
+    <div class="promo-glow"></div>
+    <div class="promo-content">
+      <span class="promo-pill">Limited Time Offer</span>
+      <h3 class="promo-headline">Get 20% Off on All Accessories</h3>
+      <p class="promo-sub">Use code <strong class="promo-code">UTA2026</strong> at checkout. Valid until end of month.</p>
+      
+    </div>
+    <div class="promo-circles">
+      <div class="promo-circle c1"></div>
+      <div class="promo-circle c2"></div>
+      <div class="promo-circle c3"></div>
+    </div>
+  </section>
+
+  <!-- ===== NEW ARRIVALS ===== -->
+  <section class="home-section" id="Newarrivals">
+    <div class="section-header">
+      <div>
+        <div class="section-label">JUST IN</div>
+        <h2 class="section-title">New Arrivals</h2>
+        <p class="section-sub">The latest additions to our collection</p>
+      </div>
+      <a class="view-all-link" [routerLink]="['/allproducts']" [queryParams]="{SortBy:'Newest',SortDescending: 'true'}">View All →</a>
+    </div>
+
+    <div class="product-grid">
+      @if (arrivalsLoading()) {
+        @for (s of skeletons; track s) {
+          <div class="product-card skeleton-card">
+            <div class="skeleton-img"></div>
+            <div class="skeleton-body">
+              <div class="skeleton-line short"></div>
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line mid"></div>
+              <div class="skeleton-line short"></div>
+            </div>
+          </div>
+        }
+      } @else {
+        @for (item of newArrivals(); track item.id) {
+          <div class="product-card">
+            <!-- Bookmark favorite button -->
+            <button class="favorite-card-btn" type="button" (click)="toggleFavorite(item)" [class.is-favorite]="item.isFavorite" aria-label="Add to favorites">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+
+            @if (item.stock >= 1) {
+              <div class="new-badge">New</div>
+            }
+
+            <div class="product-img-placeholder" [class.sold-out]="item.stock < 1">
+              @if (item.stock < 1) {
+                <div class="sold-out-badge">Sold Out</div>
+                <div class="sold-overlay"><span>Sold Out</span></div>
+              }
+              <img [src]="item.imageUrl" [alt]="item.name" loading="lazy" />
+            </div>
+
+            <div class="product-info">
+              <div class="product-tags">
+                <span class="tag">{{ item.category?.name }}</span>
+              </div>
+              <a class="product-name product-link" [routerLink]="['/products', item.id]">{{ item.name }}</a>
+              <div class="product-stars">
+                <span class="star-filled">{{ item.rating | ratingStars }}</span>
+                <span class="review-count">( {{ item.rating }} )</span>
+              </div>
+              <div class="product-footer">
+                <div class="product-price">{{ item.price }}$</div>
+                @if (item.stock >= 1) {
+                  <button class="add-btn" (click)="addToCart(item.id)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    Add to Cart
+                  </button>
+                } @else {
+                  <button class="out-btn">Out of Stock</button>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </section>
+
+  <!-- ===== TRUST / FEATURES ROW ===== -->
+  <section class="features-row">
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="1" y="3" width="15" height="13" rx="2"></rect>
+          <path d="M16 8h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1"></path>
+          <circle cx="7" cy="20" r="2"></circle>
+          <circle cx="17" cy="20" r="2"></circle>
+        </svg>
+      </div>
+      <div class="feature-text">
+        <strong>Free Shipping</strong>
+        <span>On orders over $100</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      </div>
+      <div class="feature-text">
+        <strong>Secure Payment</strong>
+        <span>100% safe transactions</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <polyline points="1 4 1 10 7 10"></polyline>
+          <path d="M3.51 15a9 9 0 1 0 .49-4.5"></path>
+        </svg>
+      </div>
+      <div class="feature-text">
+        <strong>Easy Returns</strong>
+        <span>30-day return policy</span>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </div>
+      <div class="feature-text">
+        <strong>24/7 Support</strong>
+        <span>Dedicated customer care</span>
+      </div>
+    </div>
+  </section>
+
+</div>

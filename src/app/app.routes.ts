@@ -13,6 +13,7 @@ import { VerifyEmail } from './features/auth/register/verify-email/verify-email'
 import { ProductDetails } from './features/product-details/product-details';
 import { Favorites } from './features/favorites/favorites';
 import { ForgotPassword } from './features/auth/forgot-password/forgot-password';
+import { FeaturedProducts } from './features/home/featured-products/featured-products';
 
 export const routes: Routes = [
   { path: '', component: Home, pathMatch: 'full' },
@@ -29,4 +30,6 @@ export const routes: Routes = [
   { path: 'favorites', component: Favorites, canActivate: [authGuard] },
   { path: 'verify-email', component: VerifyEmail },
   { path: 'forgot-password', component: ForgotPassword },
+  { path: 'featured-products', component: FeaturedProducts },
+
 ];

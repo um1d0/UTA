@@ -1,6 +1,6 @@
 <div class="page-wrap">
   <!-- SIDEBAR -->
-  <button class="filter-toggle" type="button" (click)="filtersOpen.update(open => !open)">
+  <button class="filter-toggle" type="button" (click)="filtersOpen.update((open) => !open)">
     <span>{{ filtersOpen() ? 'Hide filters' : 'Show filters' }}</span>
     <strong>{{ filtersOpen() ? '▲' : '▼' }}</strong>
   </button>
@@ -10,47 +10,35 @@
       <div class="sidebar-title">Categories</div>
       @for (item of Category(); track item.id) {
         <div class="category-item">
-        <label><input type="checkbox" [checked]="CategoryId() === item.id" (change)="getCategory(item.id)"/> {{item.name}}</label>
-        <span class="category-count">{{item.productCount}}</span>
-      </div>
+          <label
+            ><input
+              type="checkbox"
+              [checked]="CategoryId() === item.id"
+              (change)="getCategory(item.id)"
+            />
+            {{ item.name }}</label
+          >
+          <span class="category-count">{{ item.productCount }}</span>
+        </div>
       }
-      
-      
-      
-      <!-- <div class="category-item">
-        <label><input type="checkbox" [checked]="CategoryId() === 2" (change)="getCategory(2)"/> Smartphones</label>
-        <span class="category-count">8</span>
-      </div>
-      <div class="category-item">
-        <label><input type="checkbox" [checked]="CategoryId() === 3" (change)="getCategory(3)"/> Tablets</label>
-        <span class="category-count">6</span>
-      </div>
-      <div class="category-item">
-        <label><input type="checkbox" [checked]="CategoryId() === 4" (change)="getCategory(4)"/> Keyboards & Mice</label>
-        <span class="category-count">9</span>
-      </div>
-      <div class="category-item">
-        <label><input type="checkbox" [checked]="CategoryId() === 5" (change)="getCategory(5)"/> Headphones & Audio</label>
-        <span class="category-count">5</span>
-      </div> -->
     </div>
 
     <!-- Min Rating Section -->
     <div class="sidebar-section">
       <div class="sidebar-title">Min Rating</div>
-      <div class="rating-row"(click)="getRating(5)">
+      <div class="rating-row" (click)="getRating(5)">
         <span class="stars">★★★★★</span>
         <span class="rating-label">5 stars</span>
       </div>
-      <div class="rating-row"(click)="getRating(4)">
+      <div class="rating-row" (click)="getRating(4)">
         <span class="stars">★★★★</span><span class="stars" style="opacity: 0.25">★</span>
         <span class="rating-label">4 & up</span>
       </div>
-      <div class="rating-row"(click)="getRating(3)">
+      <div class="rating-row" (click)="getRating(3)">
         <span class="stars">★★★</span><span class="stars" style="opacity: 0.25">★★</span>
         <span class="rating-label">3 & up</span>
       </div>
-      <div class="rating-row"(click)="getRating(2)">
+      <div class="rating-row" (click)="getRating(2)">
         <span class="stars">★★</span><span class="stars" style="opacity: 0.25">★★★</span>
         <span class="rating-label">2 & up</span>
       </div>
@@ -60,29 +48,55 @@
       </div>
     </div>
 
-  
     <div class="sidebar-section">
       <div class="sidebar-title">Price Range</div>
       <form class="price-row" #PriceRange="ngForm">
         <span>$</span>
-        <input type="number" placeholder="Min" #MinPrice  (input)="autoSubmitPriceRange(MinPrice.value,this.MaxPriceSignal())"/>
+        <input
+          type="number"
+          placeholder="Min"
+          #MinPrice
+          (input)="autoSubmitPriceRange(MinPrice.value, this.MaxPriceSignal())"
+        />
         <span>-</span>
-        <input type="number" #MaxPrice (input)="autoSubmitPriceRange(this.MinPriceSignal(),MaxPrice.value)" placeholder="Max" />
+        <input
+          type="number"
+          #MaxPrice
+          (input)="autoSubmitPriceRange(this.MinPriceSignal(), MaxPrice.value)"
+          placeholder="Max"
+        />
       </form>
     </div>
 
-  
     <div class="sidebar-section">
       <div class="sidebar-title">Brand</div>
-      <input type="text" class="brand-search" #BrandNameInput placeholder="Search brand..." (input)="getBrandName(BrandNameInput.value)"/>
+      <input
+        type="text"
+        class="brand-search"
+        #BrandNameInput
+        placeholder="Search brand..."
+        (input)="getBrandName(BrandNameInput.value)"
+      />
     </div>
 
     <!-- Availability Section -->
     <div class="sidebar-section">
       <div class="sidebar-title">Availability</div>
-      <label class="avail-label"> <input type="checkbox" [checked]="inStockValue() === true" (change)="getStockStatus(true)"/> In Stock </label>
       <label class="avail-label">
-        <input type="checkbox" [checked]="inStockValue() === false" (change)="getStockStatus(false)"> Out of Stock
+        <input
+          type="checkbox"
+          [checked]="inStockValue() === true"
+          (change)="getStockStatus(true)"
+        />
+        In Stock
+      </label>
+      <label class="avail-label">
+        <input
+          type="checkbox"
+          [checked]="inStockValue() === false"
+          (change)="getStockStatus(false)"
+        />
+        Out of Stock
       </label>
       <button class="clear-btn">Clear All</button>
     </div>
@@ -90,17 +104,24 @@
 
   <!-- MAIN CONTENT -->
   <main class="main">
-    
     <div class="main-header">
       <div class="search-bar">
-       <button type="submit"> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.35-4.35"></path>
-        </svg></button>
-        <input type="text" placeholder="Search products..." #Search (input)="getSearch(Search.value)" value="{{SearchSignal()}}"/>
+        <button type="submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </button>
+        <input
+          type="text"
+          placeholder="Search products..."
+          #Search
+          (input)="getSearch(Search.value)"
+          value="{{ SearchSignal() }}"
+        />
       </div>
       <div class="header-right">
-        <span class="view-count">{{TotalProductsSignal()}} Products</span>
+        <span class="view-count">{{ TotalProductsSignal() }} Products</span>
         <select class="sort-select" #SortByselect (change)="getSortBy(SortByselect.value)">
           <option disabled selected>Sort By</option>
           <option value="Newest | true">Newest</option>
@@ -116,25 +137,31 @@
       @if (productsList()) {
         @for (item of productsList().data.items; track item.id) {
           <div class="product-card">
-            <button class="favorite-card-btn" type="button" (click)="toggleFavorite(item)">
-              {{ item.isFavorite ? '♥' : '♡' }}
+            <!-- Bookmark favorite button -->
+            <button
+              class="favorite-card-btn"
+              type="button"
+              (click)="toggleFavorite(item)"
+              [class.is-favorite]="item.isFavorite"
+              aria-label="Add to favorites"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
             </button>
             @if (item.stock >= 1) {
               <div class="product-img-placeholder">
-                <button class="favorite-btn" type="button" aria-label="Add to favorites" (click)="addFavorite(item.id)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
-                  </svg>
-                </button>
                 <img src="{{ item.imageUrl }}" alt="{{ item.name }}" />
               </div>
             } @else {
               <div class="product-img-placeholder sold-out">
-                <button class="favorite-btn" type="button" aria-label="Add to favorites" (click)="addFavorite(item.id)">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"></path>
-                  </svg>
-                </button>
                 <img src="{{ item.imageUrl }}" alt="{{ item.name }}" />
                 <div class="sold-out-badge">Sold Out</div>
                 <div class="sold-overlay"><span>Sold Out</span></div>
@@ -195,7 +222,6 @@
         <option value="24">24 per page</option>
         <option value="36">36 per page</option>
       </select>
-      
     </div>
   </main>
 </div>

@@ -4,7 +4,9 @@
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+ :host {
+    min-height: 100vh;
+ }
         body {
             background-color: #D0D0D0;
             color: #2D0057;
